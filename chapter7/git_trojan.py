@@ -38,7 +38,7 @@ def get_file_contents(filepath):
     for filename in tree.tree:
 
         if filepath in filename.path:
-            print "[*] Found file %s" % filepath
+            print ("[*] Found file %s" % filepath)
             blob = repo.blob(filename._json_data['sha'])
             return blob.content
 
@@ -86,7 +86,7 @@ class GitImporter(object):
     # 尝试获取模块所在位置
     def find_module(self, fullname, path=None):
         if configured:
-            print "[*] Attempting to retrieve %s" % fullname
+            print ("[*] Attempting to retrieve %s" % fullname)
             new_library = get_file_contents("chapter7/modules/%s" % fullname)
 
             if new_library is not None:
@@ -101,7 +101,7 @@ class GitImporter(object):
         # 创建一个空的模块对象
         module = imp.new_module(name)
         # 将github中获得的代码导入的这个对象中
-        exec self.current_module_code in module.__dict__
+        exec (self.current_module_code in module.__dict__)
         # 最后将这个新建的模块添加到sys.modules列表里面
         sys.modules[name] = module
 
